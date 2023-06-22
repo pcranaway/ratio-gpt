@@ -72,7 +72,13 @@ type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
 
 #[poise::command(slash_command)]
-async fn infer(ctx: Context<'_>) -> Result<(), Error> {
+async fn infer(
+    ctx: Context<'_>,
+
+    #[description = "The prompt"] prompt: Option<String>,
+) -> Result<(), Error> {
+    let prompt = prompt.unwrap_or("\n".to_string());
+
     let inference_temperature = 0.5;
 
     let data = ctx.data();
@@ -82,7 +88,7 @@ async fn infer(ctx: Context<'_>) -> Result<(), Error> {
 
     let inference = gpt.infer(
         &mut rand::thread_rng(),
-        &tokenizer.tokenize("\n"),
+        &tokenizer.tokenize(prompt.as_str()),
         100,
         inference_temperature,
         |_| {},
