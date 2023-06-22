@@ -30,7 +30,7 @@ fn load_gpt() -> Result<Data, Error> {
     let num_tokens = 64;
     let vocab_size = tokenizer.vocab_size();
     let embedding_degree = 64;
-    let num_layers = 4;
+    let num_layers = 6;
     let num_heads = 4;
     let head_size = embedding_degree / num_heads;
     let dropout = 0.0;
