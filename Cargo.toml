@@ -1,0 +1,23 @@
+[package]
+name = "ratio-gpt"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "bot"
+path = "src/bot.rs"
+
+[[bin]]
+name = "train"
+path = "src/train.rs"
+
+[features]
+gpu = []
+
+[dependencies]
+femto-gpt = { git = "https://github.com/keyvank/femtoGPT/", features = ["gpu"] }
+tokio = { version = "1.28.2", features = ["full"] }
+dotenv = "0.15.0"
+rand = "0.8.5"
+poise = "0.5.5"
+bincode = "1.3.3"
